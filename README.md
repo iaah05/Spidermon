@@ -19,3 +19,10 @@ Intially I was going to use a spare ESP I had laying around and a relay I also h
 [USB Terminal Connector](https://www.amazon.co.uk/dp/B07WNRLCTZ?&_encoding=UTF8&tag=iaah05-21&linkCode=ur2&linkId=1dfbfcab70f27f38aa2d4288be2a9c85&camp=1634&creative=6738)
 
 [Heat mat](https://www.amazon.co.uk/dp/B093L9KPYT?&_encoding=UTF8&tag=iaah05-21&linkCode=ur2&linkId=29d23b692e9df1d99caf9fbe832f72d4&camp=1634&creative=6738)
+
+
+## The Build
+
+I first started by putting some holes in the case to feed the wires through. I also used some C13/14 connecters for the heat mat for quick disconnection.
+
+![case_wires](https://github.com/iaah05/Spidermon/assets/66481071/f6f95e0a-8b80-44d2-9645-f44900052a0c)
