@@ -21,8 +21,31 @@ Intially I was going to use a spare ESP I had laying around and a relay I also h
 [Heat mat](https://www.amazon.co.uk/dp/B093L9KPYT?&_encoding=UTF8&tag=iaah05-21&linkCode=ur2&linkId=29d23b692e9df1d99caf9fbe832f72d4&camp=1634&creative=6738)
 
 
+## Flashing the ESP
+
+The ESP board has some dedicated headers to flash the device and as with other 8266 chips, it needs to be put into flash mode by putting GPIO0 to GND at boot. I used a dupont to achieve this then just pulled it out when it was ready to flash. I flashed through the ESPHome interface on Home Assistant using a USB FDDI Connector. 
+
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/fe34d322-85e4-42fa-a422-205eb1cbbd50" width="300" height="380">
+
+
 ## The Build
 
-I first started by putting some holes in the case to feed the wires through. I also used some C13/14 connecters for the heat mat for quick disconnection.
+I began by putting some holes in the case to feed the wires through and terminating on connecter blocks. I also used some C13/14 connecters for the heat mat for quick disconnection, without having to disturb the mat. 
 
 <img src="https://github.com/iaah05/Spidermon/assets/66481071/f6f95e0a-8b80-44d2-9645-f44900052a0c" width="600" height="300">
+
+
+Then wired the ESP board's power input and relay connection for the heat mat.
+
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/60b34722-3915-4188-b9a1-92d9ec00a743" width="600" height="300">
+
+
+A hole was drilled into the rear of the spider terrarium and the SHT35 probe was inserted. I have propped this up behind one of the decorative sticks so it is less visiable and still provides a good reading.
+
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/a9ccf2db-b8dc-4f04-9782-b368e72630c3" width="300" height="300">
+
+On the other end of the probe, it came with pre-terminated crimps? I wired this into the USB connector with the following colours:
+\+  Red (5v)
+  \-  Black (Gnd)
+  D- Yellow (sdl)
+  D+ Green (sda)
