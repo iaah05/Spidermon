@@ -44,8 +44,11 @@ A hole was drilled into the rear of the spider terrarium and the SHT35 probe was
 
 <img src="https://github.com/iaah05/Spidermon/assets/66481071/a9ccf2db-b8dc-4f04-9782-b368e72630c3" width="300" height="300">
 
-On the other end of the probe, it came with pre-terminated crimps? I wired this into the USB connector with the following colours:
-\+  Red (5v)
-  \-  Black (Gnd)
-  D- Yellow (sdl)
-  D+ Green (sda)
+
+On the other end of the probe, it came with pre-terminated crimps? I wired this into the USB connector with the following colours:\
+\+  Red (5v)\
+\-  Black (Gnd)\
+D- Yellow (sdl)\
+D+ Green (sda)\
+
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/f24404e4-8cfa-44da-9997-b9691f7125d8" width="400" height="200">
