@@ -23,7 +23,21 @@ Intially I was going to use a spare ESP I had laying around and a relay I also h
 
 ## The Code
 
-I'm still tweaking aspects of the code but the full YAML for ESPHome is here: /Spidermon/spidermon2.yaml
+I'm still tweaking aspects of the code but the full YAML for ESPHome is here: [spidermon2.yaml](https://github.com/iaah05/Spidermon/blob/main/spidermon2.yaml)
+
+The key elements are setting up the i2c component, bang_bang thermostat and setting up times for thermostat preset changes.
+
+### i2C Component
+
+The SHT35 uses i2c, so your need to define in your ESPHome code which pins will be setup for i2c bus. I made a comment for the wire colours so I didn't forget.
+```
+i2c:
+  #id: i2c_component
+  sda: GPIO12 #green
+  scl: GPIO13 #yellow
+  id: bus_a  
+  scan: true
+```
 
 ## Flashing the ESP
 
