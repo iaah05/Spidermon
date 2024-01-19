@@ -25,4 +25,4 @@ Intially I was going to use a spare ESP I had laying around and a relay I also h
 
 I first started by putting some holes in the case to feed the wires through. I also used some C13/14 connecters for the heat mat for quick disconnection.
 
-![case_wires](https://github.com/iaah05/Spidermon/assets/66481071/f6f95e0a-8b80-44d2-9645-f44900052a0c)
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/f6f95e0a-8b80-44d2-9645-f44900052a0c" width="600" height="300">
