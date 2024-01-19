@@ -32,11 +32,47 @@ The key elements are setting up the i2c component, bang_bang thermostat and sett
 The SHT35 uses i2c, so your need to define in your ESPHome code which pins will be setup for i2c bus. I made a comment for the wire colours so I didn't forget.
 ```
 i2c:
-  #id: i2c_component
   sda: GPIO12 #green
   scl: GPIO13 #yellow
   id: bus_a  
   scan: true
+```
+
+This was then tied into the sht3xd sensor platform and given appropriate names and ids. Be sure to match i2c_id in your sensor to the id defined under the i2c component.
+```
+sensor:
+  - platform: sht3xd
+    i2c_id: bus_a
+    temperature:
+      name: "Spider2 Temperature"
+      id: "Spider2_temperature"
+    humidity:
+      name: "Spider2 Humidity"
+      id: "Spider2_humidity"
+    update_interval: 25s
+```    
+
+### Relay/Heat Mat
+
+### Thermostat
+
+There are two different types of thermostats available in ESPHome, I went with bang_bang as only needed heating and it seemed to fit my needed. I have used two presets for this config, the default (home) which will run in the day and the "away" which I will switch to at night. I'm still tweaking some of these temperatures to best suit the spiders needs.
+```
+climate:
+  - platform: bang_bang
+    id: Spider2_thermostat
+    name: "Spider2 Thermostat"
+    sensor: Spider2_temperature
+    default_target_temperature_low: 22 C
+    default_target_temperature_high: 24 C
+    away_config:
+      default_target_temperature_low: 17 C
+      default_target_temperature_high: 18 C
+
+    heat_action:
+      - switch.turn_on: relay_heater2
+    idle_action:
+      - switch.turn_off: relay_heater2
 ```
 
 ## Flashing the ESP
