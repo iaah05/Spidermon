@@ -1,0 +1,123 @@
+esphome:
+  name: spidermon2
+  friendly_name: spidermon2
+
+substitutions:
+  friendly_name: spidermon2
+
+esp8266:
+  board: esp12e
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "[removed]"
+
+ota:
+  password: "[removed]"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: [removed]
+    gateway: [removed]
+    subnet: [removed]
+    dns1: [removed]
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Spidermon2 Fallback Hotspot"
+    password: "[removed]"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: True
+
+i2c:
+  #id: i2c_component
+  sda: GPIO12 #GPIO21 green
+  scl: GPIO13 #GPIO22 yellow
+  id: bus_a  
+  scan: true
+
+switch:
+  - platform: restart
+    name: ${friendly_name} Restart
+  - platform: gpio
+    id: relay_heater2
+    name: "Spider2 Heater"
+    pin: GPIO05
+
+sensor:
+  - platform: wifi_signal
+    name: ${friendly_name} WiFi Signal
+    update_interval: 60s
+  - platform: uptime
+    name: ${friendly_name} Uptime 
+    id: uptime_sec
+    update_interval: 120s
+  - platform: sht3xd
+    i2c_id: bus_a
+    temperature:
+      name: "Spider2 Temperature"
+      id: "Spider2_temperature"
+    humidity:
+      name: "Spider2 Humidity"
+      id: "Spider2_humidity"
+    #address: 0x44
+    update_interval: 25s
+    
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ${friendly_name} IP
+    ssid:
+      name: ${friendly_name} SSID
+    bssid:
+      name: ${friendly_name} BSSID
+
+climate:
+  - platform: bang_bang
+    id: Spider2_thermostat
+    name: "Spider2 Thermostat"
+    sensor: Spider2_temperature
+    default_target_temperature_low: 22 C
+    default_target_temperature_high: 24 C
+    away_config:
+      default_target_temperature_low: 17 C
+      default_target_temperature_high: 18 C
+
+    heat_action:
+      - switch.turn_on: relay_heater2
+    idle_action:
+      - switch.turn_off: relay_heater2
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time  
+  - platform: sntp
+    on_time:
+      - seconds: 0
+        minutes: 00
+        hours: 7
+        then:
+          - climate.control:
+              id: Spider2_thermostat
+              preset: HOME      
+      - seconds: 0
+        minutes: 00
+        hours: 20
+        then:
+          - climate.control:
+              id: Spider2_thermostat
+              preset: AWAY
