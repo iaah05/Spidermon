@@ -45,10 +45,17 @@ A hole was drilled into the rear of the spider terrarium and the SHT35 probe was
 <img src="https://github.com/iaah05/Spidermon/assets/66481071/a9ccf2db-b8dc-4f04-9782-b368e72630c3" width="300" height="300">
 
 
-On the other end of the probe, it came with pre-terminated ferrules that I wired this into the USB connector with the below colours. Again this allows me to move the controller away for maintenance without disturbing the probe in the terrarium. 
+The other end of the probe came with pre-terminated ferrules that I wired this into the USB connector with the below colours. Again this allows me to move the controller away for maintenance without disturbing the probe in the terrarium. 
 \+  Red (5v)\
 \-  Black (Gnd)\
 D- Yellow (sdl)\
 D+ Green (sda)\
 
 <img src="https://github.com/iaah05/Spidermon/assets/66481071/f24404e4-8cfa-44da-9997-b9691f7125d8" width="400" height="200">
+
+
+The other end of the USB socket had different colours, they went to the ESP Chip pins:
+5V  Red (5v)\
+Gnd  Black (Gnd)\
+GPIO13 White (sdl)\
+GPIO12 Green (sda)\
