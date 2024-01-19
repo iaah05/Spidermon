@@ -53,10 +53,18 @@ sensor:
 ```    
 
 ### Relay/Heat Mat
+The pin that connects to the on-board relay needs to be defined, on this board it is GPIO05. This is what will control power to the heat mat.
+``` 
+switch:
+  - platform: gpio
+    id: relay_heater2
+    name: "Spider2 Heater"
+    pin: GPIO05
+```
 
 ### Thermostat
 
-There are two different types of thermostats available in ESPHome, I went with bang_bang as only needed heating and it seemed to fit my needed. I have used two presets for this config, the default (home) which will run in the day and the "away" which I will switch to at night. I'm still tweaking some of these temperatures to best suit the spiders needs.
+There are two different types of thermostats available in ESPHome, I went with bang_bang as only needed heating and it seemed to fit my needed. I have used two presets for this config, the default (home) which will run in the day and the "away" which I will switch to at night. I'm still tweaking some of these temperatures to best suit the spiders needs. This ties together the temperature readings with the heat mat.
 ```
 climate:
   - platform: bang_bang
@@ -73,6 +81,31 @@ climate:
       - switch.turn_on: relay_heater2
     idle_action:
       - switch.turn_off: relay_heater2
+```
+
+### Auto-switches of Presets
+
+I wanted to auto switch between the heating presets so that it would be cooler at night (mirroring a real habit a bit more) whilst still providing some background heat as it gets quite cold in the UK in Winter time. I used the time component so switch between the home and away presets.
+```
+time:
+  - platform: homeassistant
+    id: homeassistant_time  
+  - platform: sntp
+    on_time:
+      - seconds: 0
+        minutes: 00
+        hours: 7
+        then:
+          - climate.control:
+              id: Spider2_thermostat
+              preset: HOME      
+      - seconds: 0
+        minutes: 00
+        hours: 20
+        then:
+          - climate.control:
+              id: Spider2_thermostat
+              preset: AWAY
 ```
 
 ## Flashing the ESP
@@ -103,7 +136,7 @@ The other end of the probe came with pre-terminated ferrules that I wired this i
 \+  Red (5v)\
 \-  Black (Gnd)\
 D- Yellow (sdl)\
-D+ Green (sda)\
+D+ Green (sda)
 
 <img src="https://github.com/iaah05/Spidermon/assets/66481071/f24404e4-8cfa-44da-9997-b9691f7125d8" width="400" height="200">
 
@@ -112,4 +145,13 @@ The other end of the USB socket had different colours, they went to the ESP Chip
 5V  Red (5v)\
 Gnd  Black (Gnd)\
 GPIO13 White (sdl)\
-GPIO12 Green (sda)\
+GPIO12 Green (sda)
+
+## Next Steps
+
+Whilst the heating component is working at the moment, there are still some improvements I want to make. An obvious one is controlling the LED light I have over the top of the terrarium. It is powered using a USB plug so I plan on using a MOSFET controlled by software PWM on the ESP to simulate sunrise and sunset. I already have an automation in Home Assistant to alert me if the ESP goes offline but I plan to create additional automations for high/low temperature and humidity threasholds. 
+
+Thank you for reading.
+
+<img src="https://github.com/iaah05/Spidermon/assets/66481071/7fdc1ed6-551f-45bd-991a-41b0a37516ca" width="300" height="300">
+
