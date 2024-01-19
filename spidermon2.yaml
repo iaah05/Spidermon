@@ -44,7 +44,6 @@ status_led:
     inverted: True
 
 i2c:
-  #id: i2c_component
   sda: GPIO12 #green
   scl: GPIO13 #yellow
   id: bus_a  
