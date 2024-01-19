@@ -83,9 +83,9 @@ climate:
       - switch.turn_off: relay_heater2
 ```
 
-### Auto-switches of Presets
+### Auto-switch of Presets
 
-I wanted to auto switch between the heating presets so that it would be cooler at night (mirroring a real habit a bit more) whilst still providing some background heat as it gets quite cold in the UK in Winter time. I used the time component so switch between the home and away presets.
+I wanted to auto switch between the heating presets so that it would be cooler at night (mirroring a real habit a bit more) whilst still providing some background heat as it gets quite cold in the UK in Winter time. I used the time component to switch between the home and away presets.
 ```
 time:
   - platform: homeassistant
